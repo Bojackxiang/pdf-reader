@@ -1,5 +1,6 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { buttonVariants } from "@/components/ui/button";
+import { LINKS } from "@/constants/links";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,10 +29,10 @@ export default function Home() {
             size: "lg",
             className: "mt-3",
           })}
-          href="/dashboard"
+          href={LINKS.dashboard.link}
           target="_blank"
         >
-          Get started <ArrowRight className="ml-2 h-5 w-5" />
+          {LINKS.dashboard.name}
         </Link>
       </MaxWidthWrapper>
       <div>
@@ -94,7 +95,7 @@ export default function Home() {
         </div>
 
         {/* steps */}
-        <ol className='my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0'>
+        <ol className='my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-2 md:px-5'>
           <li className='md:flex-1'>
             <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
               <span className='text-sm font-medium text-blue-600'>
@@ -107,9 +108,9 @@ export default function Home() {
                 Either starting out with a free plan or
                 choose our{' '}
                 <Link
-                  href='/pricing'
+                  href={LINKS.pricing2.link}
                   className='text-blue-700 underline underline-offset-2'>
-                  pro plan
+                  {LINKS.pricing2.name}
                 </Link>
                 .
               </span>
