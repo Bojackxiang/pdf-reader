@@ -10,7 +10,9 @@
     "db-init": "npx prisma db init",
     "db-push": "dotenv -e .env.development -- npx prisma db push",
     "db-generate": "npx prisma generate",
+    "db-studio": "dotenv -e .env.development -- npx prisma studio",
     "postinstall": "prisma generate"
+    
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^1.8.25",
