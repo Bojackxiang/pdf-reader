@@ -10,12 +10,12 @@ const DashboardPage = async ({}: DashboardPageProps) => {
   const user = getUser();
 
   if (!user || !user.id) {
-    redirect("/auth-callback?origin=dashboard");
+    // need to redirect to sign up page
   }
 
   const dbUser = await db.user.findFirst({
     where: {
-      id: user.id,
+      id: user.id!,
     },
   });
 

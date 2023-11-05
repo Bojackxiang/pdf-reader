@@ -1,46 +1,33 @@
-import { redirect, useSearchParams } from "next/navigation";
+"use client";
+
+import { redirect, useRouter } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "@/db";
 import { Loader2 } from "lucide-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+const END_POINT = "http://localhost:3000/api/v1/user";
 
 interface AuthCallbackProps {}
 
-const AuthCallbackPage = async ({}: AuthCallbackProps) => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  // handle if no user
-  if (!user || !user.email || !user.id) {
-    // handle auth err: sign out
-    return;
-  }
-
-  const dbUser = await db.user.findFirst({
-    where: {
-      id: user.id,
+const AuthCallbackPage = ({}: AuthCallbackProps) => {
+  const router = useRouter();
+  const { data, isError, isLoading, isSuccess } = useQuery({
+    queryFn: async () => {
+      const response = await axios.post(END_POINT, undefined);
+      return response.data;
     },
+    queryKey: ["query_init_users"],
   });
 
-  if (!dbUser) {
-    const response = await db.user.create({
-      data: {
-        email: user.email,
-        id: user.id,
-      },
-    });
+  console.log(data)
 
-    console.log(response);
-    if (response.id) {
-      redirect("/dashboard");
-    } else {
-      // handler error page
-      // sign out
-      return;
-    }
+  if (isSuccess) {
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 2000);
   }
 
   return (
