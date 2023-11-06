@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 import {
   Dialog,
   DialogClose,
@@ -33,8 +32,8 @@ const UploadButton = (props: UploadButtonProps) => {
         }}
       >
         <DialogTrigger asChild>
-          <Button variant="outline" onClick={() => setIsOpen(true)}>
-            Share
+          <Button onClick={() => setIsOpen(true)}>
+            Upload PDF
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">

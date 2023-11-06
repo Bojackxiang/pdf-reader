@@ -12,6 +12,7 @@ const DashboardPage = async ({}: DashboardPageProps) => {
 
   if (!user || !user.id) {
     // need to redirect to sign up page
+    return;
   }
 
   const dbUser = await db.user.findFirst({
@@ -24,11 +25,7 @@ const DashboardPage = async ({}: DashboardPageProps) => {
     redirect("/auth-callback?origin=dashboard");
   }
 
-  return (
-    
-      <Dashboard />
-    
-  );
+  return <Dashboard userId={user.id}/>;
 };
 
 export default DashboardPage;
